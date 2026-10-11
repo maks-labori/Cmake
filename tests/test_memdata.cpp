@@ -1,6 +1,8 @@
+// Copyright 2026 Maksim
+
 #include "gtest/gtest.h"
 #include "Vector_lib/memdata.h"
-
+#include <utility>
 TEST(MemDataTest, DefaultConstructor) {
     MemData<int> m;
     EXPECT_EQ(m.capacity(), MEM_STEP);
@@ -86,7 +88,7 @@ TEST(MemDataTest, ShiftRight) {
     MemData<int> m(10);
     for (size_t i = 0; i < 5; ++i) m[i] = static_cast<int>(i);
 
-    m.shiftRight(1, 3); 
+    m.shiftRight(1, 3);
 
     EXPECT_EQ(m[0], 0);
     EXPECT_EQ(m[2], 1);
