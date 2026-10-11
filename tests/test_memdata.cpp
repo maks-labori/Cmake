@@ -1,7 +1,7 @@
 // Copyright 2026 Maksim
-#include "Vector_lib/memdata.h"
-#include "gtest/gtest.h"
 #include <utility>
+#include "gtest/gtest.h"
+#include "Vector_lib/memdata.h"
 TEST(MemDataTest, DefaultConstructor) {
     MemData<int> m;
     EXPECT_EQ(m.capacity(), MEM_STEP);

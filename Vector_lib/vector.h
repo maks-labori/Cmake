@@ -1,11 +1,11 @@
 // Copyright 2026 Maksim
 #pragma once
 
-#include "Vector_lib/mem_data.h"
 #include <cstddef>
 #include <cstdlib>
 #include <iostream>
 #include <utility>
+#include "Vector_lib/mem_data.h"
 
 template<class T>
 class Vector {
@@ -145,8 +145,8 @@ class Vector {
     Vector<T>& operator=(const Vector<T>&) noexcept;
     Vector<T>& operator=(Vector<T>&&) noexcept;
     bool operator==(const Vector<T>&) const noexcept;
-    T& operator[](size_t) noexcept;
-    const T& operator[](size_t) const noexcept;
+    T& operator[](size_t index) noexcept;
+    const T& operator[](size_t index) const noexcept;
 
  private:
     // get true index by relative

@@ -1,8 +1,8 @@
 // Copyright 2026 Maksim
 
-#include "Vector_lib/vector.h"
-#include "gtest/gtest.h"
 #include <utility>
+#include "gtest/gtest.h"
+#include "Vector_lib/vector.h"
 TEST(VectorTest, DefaultConstructor) {
     Vector<int> v;
     EXPECT_EQ(v.size(), 0u);
