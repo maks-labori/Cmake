@@ -1,18 +1,19 @@
 #pragma once
 #include <initializer_list>
-#include <cstdlib>      // дл€ рандома
+#include <cstdlib>      // for random
 #include <ctime>
-#include <string>       // дл€ std::getline
-#include <sstream>      // дл€ std::istringstream
-
-#define MEM_STEP 16     //шаг: сколько выдел€етс€ €чеек пам€ти минимум при выделении пам€ти
+#include <string>       // for std::getline
+#include <sstream>      // for std::istringstream
+#include <utility>
+#define MEM_STEP 16  
+//step: how much cells memory to highlight in happening size=0
 
 template <class T>
 class MemData {
     T* data_;
     size_t capacity_;
 public:
-    MemData(size_t size = 0, const T* data = nullptr);
+    explicit MemData(size_t size = 0, const T* data = nullptr);
     MemData(std::initializer_list<T> list);
     MemData(const MemData<T>&) = delete;
     MemData(MemData<T>&&) noexcept;
@@ -36,14 +37,19 @@ public:
     T& at(size_t index);
     const T& at(size_t index) const;
 
-    void allocateRaw(size_t capacity); // перевыделение пам€ти без сохранени€ данных (возможно уменьшение capasity)
-    void clear() noexcept; // освобождение пам€ти
-    void realloc(size_t capacity, size_t start, size_t size); // перевыделение пам€ти с сохранением данных в диапазоне [start, start + size)
-    void shiftRight(size_t start, size_t count);  // сдвиг элементов вправо
-    void shiftLeft(size_t start, size_t count);   // сдвиг элементов влево
+    // without save memory (happen less capasity)
+    void allocateRaw(size_t capacity);  
+
+    void clear() noexcept;  // clear memory
+
+    // with save memory [start, start + size)
+    void realloc(size_t capacity, size_t start, size_t size);  
+
+    void shiftRight(size_t start, size_t count);
+    void shiftLeft(size_t start, size_t count);
     void reallocWithShiftRight(size_t newCapacity, size_t start, size_t count);
 
-    size_t calculateCapacity_(size_t capacity); // вычисление нового размера пам€ти с учетом MEM_STEP
+    size_t calculateCapacity_(size_t capacity);  // new capacity with MEM_STEP
 
     MemData<T>& operator=(const MemData<T>&) = delete;
     MemData<T>& operator=(MemData<T>&&) noexcept;
@@ -55,8 +61,8 @@ size_t MemData<T>::calculateCapacity_(size_t capacity) {
 }
 
 template<class T>
-MemData<T>::MemData(size_t size, const T* array) : capacity_(0), data_(nullptr)
-{
+MemData<T>::MemData(size_t size, const T* array) : 
+    capacity_(0), data_(nullptr){
     allocateRaw(calculateCapacity_(size));
     for (size_t i = 0; i < size; ++i) {
         (*this)[i] = array ? array[i] : T();
@@ -64,8 +70,8 @@ MemData<T>::MemData(size_t size, const T* array) : capacity_(0), data_(nullptr)
 }
 
 template<class T>
-MemData<T>::MemData(std::initializer_list<T> list) : capacity_(0), data_(nullptr)
-{
+MemData<T>::MemData(std::initializer_list<T> list) : 
+    capacity_(0), data_(nullptr){
     allocateRaw(calculateCapacity_(list.size()));
     auto it = list.begin();
     for (size_t i = 0; i < list.size(); ++i) {
@@ -74,7 +80,8 @@ MemData<T>::MemData(std::initializer_list<T> list) : capacity_(0), data_(nullptr
 }
 
 template <class T>
-MemData<T>::MemData(MemData<T>&& other) noexcept : capacity_(other.capacity_), data_(other.data_) {
+MemData<T>::MemData(MemData<T>&& other) noexcept : 
+    capacity_(other.capacity_), data_(other.data_) {
     other.capacity_ = 0;
     other.data_ = nullptr;
 }
@@ -101,8 +108,7 @@ const T& MemData<T>::at(size_t index) const {
 }
 
 template<class T>
-void MemData<T>::allocateRaw(size_t capacity)
-{
+void MemData<T>::allocateRaw(size_t capacity){
     capacity_ = capacity;
     T* newData = nullptr;
     try {
@@ -127,10 +133,11 @@ void MemData<T>::clear() noexcept {
 }
 
 template<class T>
-void MemData<T>::realloc(size_t capacity, size_t start, size_t count)
-{
+void MemData<T>::realloc(size_t capacity, size_t start, size_t count){
     if (start + count > capacity_) {
-        throw std::out_of_range("ERROR: Reallocate with shift right out of range!");
+        throw std::out_of_range(
+            "ERROR: Reallocate with shift right out of range!"
+        );
     }
 
     T* newData = nullptr;
@@ -149,8 +156,7 @@ void MemData<T>::realloc(size_t capacity, size_t start, size_t count)
 }
 
 template<class T>
-void MemData<T>::shiftRight(size_t start, size_t count)
-{
+void MemData<T>::shiftRight(size_t start, size_t count){
     if (start + count > capacity_) {
         throw std::out_of_range("ERROR: Shift right out of range!");
     }
@@ -160,8 +166,7 @@ void MemData<T>::shiftRight(size_t start, size_t count)
 }
 
 template<class T>
-void MemData<T>::shiftLeft(size_t start, size_t count)
-{
+void MemData<T>::shiftLeft(size_t start, size_t count){
     if (start + count > capacity_) {
         throw std::out_of_range("ERROR: Shift left out of range!");
     }
@@ -169,12 +174,13 @@ void MemData<T>::shiftLeft(size_t start, size_t count)
         data_[i] = std::move(data_[i + 1]);
     }
 }
-
 template<class T>
-void MemData<T>::reallocWithShiftRight(size_t newCapacity, size_t start, size_t count)
-{
+void MemData<T>::reallocWithShiftRight(
+    size_t newCapacity, size_t start, size_t count){
     if (start + count > capacity_) {
-        throw std::out_of_range("ERROR: Reallocate with shift right out of range!");
+        throw std::out_of_range(
+            "ERROR: Reallocate with shift right out of range!"
+        );
     }
 
     T* newData = nullptr;
@@ -185,12 +191,10 @@ void MemData<T>::reallocWithShiftRight(size_t newCapacity, size_t start, size_t 
         throw std::bad_alloc();
     }
 
-    size_t i = 0;
-    //  опируем до start
+    size_t i = 0;  // Copy to start
     for (; i < start; ++i) {
         newData[i] = std::move(data_[i]);
-    }
-    //  опируем со сдвигом на 1 элемент вправо, чтобы освободить место дл€ вставки
+    }  // Copy with shift to 1 element in right,that free memory for insert
     for (; i < start + count; ++i) {
         newData[i + 1] = std::move(data_[i]);
     }

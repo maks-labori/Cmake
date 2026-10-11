@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "vector.h"
+#include "Vector_lib/vector.h"
 TEST(VectorTest, DefaultConstructor) {
     Vector<int> v;
     EXPECT_EQ(v.size(), 0u);
@@ -236,7 +236,6 @@ TEST(VectorTest, EqualitySameContentDifferentLayout) {
     v2.pushFront(2);
     v2.pushFront(1);
 
-    // Содержимое одинаковое: [1, 2]
     EXPECT_EQ(v1[0], v2[0]);
     EXPECT_EQ(v1[1], v2[1]);
 
@@ -278,7 +277,6 @@ TEST(VectorTest, IteratorArithmetic) {
 
 TEST(VectorTest, EmptyVectorIterator_FAILS_DUE_TO_BUG) {
     Vector<int> v;
-    // begin() и end() вызывают front() и back(), которые бросают исключение
     EXPECT_NO_THROW({
         auto b = v.begin();
         auto e = v.end();
