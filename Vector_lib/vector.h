@@ -1,10 +1,12 @@
 // Copyright 2026 Maksim
 #pragma once
+
 #include "Vector_lib/mem_data.h"
-#include <iostream>
+#include <cstddef>
 #include <cstdlib>
+#include <iostream>
 #include <utility>
-#include <cstddef>  // for size_t
+
 template<class T>
 class Vector {
  private:

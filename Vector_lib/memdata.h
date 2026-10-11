@@ -1,12 +1,15 @@
 // Copyright 2026 Maksim
 #pragma once
-#include <initializer_list>
-#include <cstdlib>      // for random
+
+#include <cstddef>          // for size_t (C system / Alphabetical)
+#include <cstdlib>          // for random
 #include <ctime>
-#include <string>       // for std::getline
-#include <sstream>      // for std::istringstream
-#include <utility>  // for move
-#include <cstddef>  // for size_t
+
+#include <initializer_list>  // C++ system (Alphabetical)
+#include <sstream>          // for std::istringstream
+#include <string>           // for std::getline
+#include <utility>          // for move
+
 #define MEM_STEP 16
 // step: how much cells memory to highlight in happening size=0
 
