@@ -1,7 +1,6 @@
 // Copyright 2026 Maksim
-
-#include "gtest/gtest.h"
 #include "Vector_lib/memdata.h"
+#include "gtest/gtest.h"
 #include <utility>
 TEST(MemDataTest, DefaultConstructor) {
     MemData<int> m;

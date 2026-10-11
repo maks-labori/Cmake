@@ -1,7 +1,7 @@
 // Copyright 2026 Maksim
 
-#include "gtest/gtest.h"
 #include "Vector_lib/vector.h"
+#include "gtest/gtest.h"
 #include <utility>
 TEST(VectorTest, DefaultConstructor) {
     Vector<int> v;

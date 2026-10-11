@@ -12,12 +12,11 @@
 
 template <class T>
 class MemData {
-
  private:
     T* data_;
     size_t capacity_;
 
-public:
+ public:
     explicit MemData(size_t size = 0, const T* data = nullptr);
     MemData(std::initializer_list<T> list);
     MemData(const MemData<T>&) = delete;
