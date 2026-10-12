@@ -1,7 +1,7 @@
-// Copyright 2024 Marina Usova
+// Copyright 2026 Maksim Tarasenko
 
 #include <gtest/gtest.h>
-#include "../lib_easy_example/easy_example.h"
+#include "../Algorithms/easy_example.h"
 
 #define EPSILON 0.000001
 

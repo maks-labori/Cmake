@@ -1,11 +1,11 @@
-// Copyright 2024 Marina Usova
+// Copyright 2026 Maksim Tarasenko
 
 #define EASY_EXAMPLE
 #ifdef EASY_EXAMPLE
 
 #include <iostream>
 #include <iomanip>
-#include "../lib_easy_example/easy_example.h"
+#include "../Algorithms/easy_example.h"
 
 int main() {
   int a, b;
