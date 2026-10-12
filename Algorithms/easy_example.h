@@ -1,4 +1,4 @@
-// Copyright 2024 Marina Usova
+// Copyright 2026 Maksim Tarasenko
 
 #ifndef LIB_EASY_EXAMPLE_EASY_EXAMPLE_H_
 #define LIB_EASY_EXAMPLE_EASY_EXAMPLE_H_
