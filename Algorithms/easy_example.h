@@ -5,4 +5,4 @@
 
 float division(int a, int b);
 
-#endif  // LIB_EASY_EXAMPLE_EASY_EXAMPLE_H_
+#endif  // ALGORITHMS_EASY_EXAMPLE_H_
