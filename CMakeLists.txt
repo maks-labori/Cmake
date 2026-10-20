@@ -12,9 +12,10 @@ project(DataStructure)
 include(cmake/function.cmake)         # подхватываем функции, реализованные в файле function.cmake
                                       # для простоты мы объединили наборы команд для создания статической библиотеки
 								      # и для создания исполняемого проекта в отдельные функции
-add_subdirectory(DS_APP)                # подключаем дополнительный CMakeLists.txt из подкаталога с именем main
 add_subdirectory(Algorithms)    # подключаем дополнительный CMakeLists.txt из подкаталога с именем lib_easy_example
 add_subdirectory(Vector_lib)    # подключаем дополнительный CMakeLists.txt из подкаталога с именем lib_easy_example
+add_subdirectory(DS_APP)                # подключаем дополнительный CMakeLists.txt из подкаталога с именем main
+
 
 
 option(BTEST "build test?" ON)        # указываем подключаем ли google-тесты (ON или YES) или нет (OFF или NO)

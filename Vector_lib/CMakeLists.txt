@@ -1,1 +1,2 @@
 create_project_lib(VectorExample)
+target_include_directories(VectorExample PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Vector_lib)
