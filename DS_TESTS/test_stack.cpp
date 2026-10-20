@@ -1,5 +1,8 @@
+// Copyright 2026 Maksim
+
 #include <gtest/gtest.h>
-#include "../Algorithms/skobki.cpp"
+#include <string>
+#include "../Algorithms/skobki.h"
 
 TEST(TestSkobki,TestOnTrueExample) {
     std::string input = "{(())()[()()]}";

@@ -1,15 +1,16 @@
+// Copyright 2026 Maksim Tarasenko
 #pragma once
 #include <iostream>
 #include <stdexcept>
 template <class T>
 class Stack {
-private:
+ private:
     T* data_;
     size_t size_;
     int top_;
 
-public:
-    Stack(size_t size);
+ public:
+    explicit Stack(size_t size);
     Stack(const Stack& other);
     ~Stack();
     void push(const T& value);
@@ -57,7 +58,9 @@ Stack<T>::~Stack() {
 
 template <typename T>
 void Stack<T>::push(const T& value) {
-    if (is_full()) { throw std::logic_error("stack overflow"); }
+    if (is_full()) {
+        throw std::logic_error("stack overflow");
+    }
     data_[++top_] = value;
 }
 

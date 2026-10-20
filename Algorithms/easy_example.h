@@ -1,5 +1,5 @@
 // Copyright 2026 Maksim Tarasenko
-#pragma once 
+#pragma once
 
 #ifndef ALGORITHMS_EASY_EXAMPLE_H_
 #define ALGORITHMS_EASY_EXAMPLE_H_
