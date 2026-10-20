@@ -4,7 +4,7 @@
 #include <string>
 #include "../Algorithms/skobki.h"
 
-TEST(TestSkobki,TestOnTrueExample) {
+TEST(TestSkobki, TestOnTrueExample) {
     std::string input = "{(())()[()()]}";
     bool flag = check_breckets(input);
     EXPECT_EQ(flag, true);

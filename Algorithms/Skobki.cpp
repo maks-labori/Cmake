@@ -1,5 +1,5 @@
 // Copyright 2026 Maksim
-
+#include <string>
 #include "../StackMas_lib/Stack.h"
 #include "../Algorithms/skobki.h"
 

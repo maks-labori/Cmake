@@ -41,7 +41,7 @@ Stack<T>::Stack(const Stack& other) {
     data_ = new T[other.size_];
     top_ = other.size_ - 1;
     size_ = other.size_;
-    for (size_t i = 0;i < other.size_;++i) {
+    for (size_t i = 0; i < other.size_; ++i) {
         data_[i] = other.data_[i];
     }
 }
