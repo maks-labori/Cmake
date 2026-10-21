@@ -11,9 +11,9 @@ TEST(TestStackMas , TestSizeConstructor) {
 
 TEST(TestStackMas , TestCopyConstructor) {
     Stack<int> stack(20);
-    Stack<int> copy(stack);
-    EXPECT_EQ(stack.get_size(), copy.get_size());
-    EXPECT_EQ(stack.get_top(), copy.get_top());
+    Stack<int> copy_stack(stack);
+    EXPECT_EQ(stack.get_size(), copy_stack.get_size());
+    EXPECT_EQ(stack.get_top(), copy_stack.get_top());
 }
 
 TEST(TestStackMas , TestIsFull) {
@@ -44,7 +44,7 @@ TEST(TestStackMas , TesTop) {
 
 TEST(TestStackMas , TestPop) {
     Stack<int> stack(30);
-    EXPECT_THROW(stack.pop(),std::logic_error);
+    EXPECT_THROW(stack.pop(), std::logic_error);
     stack.push(5);
     EXPECT_EQ(stack.pop(), 5);
     EXPECT_THROW(stack.pop(), std::logic_error);
