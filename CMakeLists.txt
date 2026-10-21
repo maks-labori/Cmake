@@ -25,6 +25,7 @@ if(BTEST)                             # если тесты подключены
     add_subdirectory("third_party/gtest" EXCLUDE_FROM_ALL)
     enable_testing()
     add_subdirectory(DS_TESTS)
+    add_subdirectory(tests)
 endif()
 
 

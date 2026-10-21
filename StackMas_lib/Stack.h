@@ -15,6 +15,12 @@ class Stack {
     ~Stack();
     void push(const T& value);
     T pop();
+    inline size_t get_size()const noexcept {
+        return size_;
+    }
+    inline int get_top()const noexcept {
+        return top_;
+    }
     inline T& top() {
         if (is_empty()) {
             throw std::logic_error("empty");
@@ -39,9 +45,9 @@ Stack<T>::Stack(size_t size) {
 template <typename T>
 Stack<T>::Stack(const Stack& other) {
     data_ = new T[other.size_];
-    top_ = other.size_ - 1;
+    top_ = other.top_;
     size_ = other.size_;
-    for (size_t i = 0; i < other.size_; ++i) {
+    for (size_t i = 0; i <= other.top_; ++i) {
         data_[i] = other.data_[i];
     }
 }

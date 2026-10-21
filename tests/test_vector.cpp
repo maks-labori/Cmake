@@ -2,7 +2,7 @@
 
 #include <utility>
 #include "gtest/gtest.h"
-#include "Vector_lib/vector.h"
+#include "../Vector_lib/vector.h"
 TEST(VectorTest, DefaultConstructor) {
     Vector<int> v;
     EXPECT_EQ(v.size(), 0u);
@@ -320,4 +320,3 @@ TEST(VectorTest, InputOperator) {
     EXPECT_EQ(v[0], 10);
     EXPECT_EQ(v[2], 30);
 }
-
