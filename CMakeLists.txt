@@ -11,9 +11,11 @@ project(DataStructure)
 
 include(cmake/function.cmake)         # подхватываем функции, реализованные в файле function.cmake
                                       # для простоты мы объединили наборы команд для создания статической библиотеки
-add_subdirectory(StackMas_lib)    # подключаем дополнительный CMakeLists.txt из подкаталога с именем lib_easy_example
-add_subdirectory(Vector_lib)    # подключаем дополнительный CMakeLists.txt из подкаталога с именем lib_easy_example			
-add_subdirectory(Algorithms)    # подключаем дополнительный CMakeLists.txt из подкаталога с именем lib_easy_example
+add_subdirectory(StackMas_lib)
+add_subdirectory(multistack_lib)
+add_subdirectory(Vector_lib) 
+add_subdirectory(ListNode_lib)		
+add_subdirectory(Algorithms) 
 add_subdirectory(DS_APP)                # подключаем дополнительный CMakeLists.txt из подкаталога с именем main
 
 
