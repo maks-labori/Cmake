@@ -13,22 +13,24 @@ class Multistack {
   int* tops_;
   size_t count;
   size_t size;
+  size_t stacks;
 
  public:
-  Multistack(size_t count_stack, size_t size) {
-    this.size = size;
-    data_ = new T[size];
+  Multistack(size_t count_stack, size_t _size) {
+    size = _size;
+    stacks = count_stack;
+    data_ = new T[_size];
     R = new int[count_stack];
     L = new int[count_stack];
     tops_ = new int[count_stack];
     count = 0;
-    size_t part = (size / count_stack) + (size % count_stack != 0);
+    size_t part = (_size / count_stack) + (_size % count_stack != 0);
     for (size_t i = 0; i < count_stack; ++i) {
       tops_[i] = -1 + part * i;
       L[i] = part * i;
       R[i] = L[i] + part - 1;
     }
-    R[count_stack - 1] = size - 1;
+    R[count_stack - 1] = _size - 1;
   }
   ~Multistack() {
     delete[] R;
@@ -41,22 +43,31 @@ class Multistack {
     std::vector<int> R_ptrs;
     int cnt = 0;
     L_ptrs.push_back(0);
-    for (int* top : tops) {
-      int part = static_cast<int>(
-          1.0 + (static_cast<double>(top - L[cnt] + 1) / count) * size);
+    while (true) {
       if (R[cnt] == size - 1) {
         R_ptrs.push_back(R[cnt]);
         break;
       }
-      R_ptrs.push_back(L_ptrs[cnt] + part);
+      int top = tops_[cnt];
+      int elem_count = (top - L[cnt] + 1);
+      int part = (elem_count == 0)
+                     ? 1
+                     : elem_count + 1 +
+                           static_cast<int>(
+                               static_cast<double>(size - count - 1) / stacks);
+      if (part > (size - stacks + 1)) {
+        throw std::logic_error("stack is full");
+      }
+      R_ptrs.push_back(L_ptrs[cnt] + part - 1);
       L_ptrs.push_back(R_ptrs[cnt] + 1);
       cnt++;
     }
     for (int i = cnt; i >= 0; --i) {
-      for (int j = tops_[cnt]; j > L[cnt] - 1; --j) {
-        int new_index = j - L[cnt] + L_ptrs[cnt];
-        data[new_index] = data_[j];
+      for (int j = tops_[i]; j > L[i] - 1; --j) {
+        int new_index = j - L[i] + L_ptrs[i];
+        data_[new_index] = data_[j];
       }
+      tops_[i] = tops_[i] - L[i] + L_ptrs[i];
     }
     for (int i = 0; i < cnt + 1; ++i) {
       L[i] = L_ptrs[i];
