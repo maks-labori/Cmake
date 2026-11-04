@@ -1,5 +1,6 @@
 // Copyright 2026 Maksim
 
+#include <vector>
 #include "../ListNode_lib/ListNode.h"
 #include "gtest/gtest.h"
 
