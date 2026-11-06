@@ -63,7 +63,7 @@ class ListNode {
     }
     Type& operator*() { return (current_->data_); }
     Node<Type>* operator->() { return current_; }
-    const Node<Type>& operator*() const { return (current_->data_); }
+    const Type& operator*() const { return current_->data_; }
     Iterator<Type>& operator=(const Iterator<Type>& it) {
       current_ = it.current_;
       return (*this);
@@ -98,7 +98,7 @@ class ListNode {
   typedef Iterator<const T> const_iterator;
 
   const_iterator cbegin() const noexcept { return const_iterator(head_); }
-  const_iterator cend() const noexcept { return const_iterator(tail_); }
+  const_iterator cend() const noexcept { return const_iterator(tail_->next_); }
   iterator begin() noexcept { return iterator(head_); }
   iterator end() noexcept { return iterator(tail_->next_); }
 };

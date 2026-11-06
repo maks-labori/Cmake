@@ -69,10 +69,19 @@ TEST(Testmultistack, TestRepackShiftRight) {
   }
   EXPECT_THROW(multistack.push(1, 99), std::logic_error);
 }
+
 TEST(Testmultistack, TestRepackShiftLeft) {
   Multistack<int> multistack2(3, 15);
   for (int i = 0; i < 13; ++i) {
     EXPECT_NO_THROW(multistack2.push(3, (i + 1) * 100));
   }
   EXPECT_THROW(multistack2.push(3, 99), std::logic_error);
+}
+
+TEST(Testmultistack, TestRepackInternalStack) {
+  Multistack<int> multistack(3, 14);
+  for (int i = 0; i < 12; ++i) {
+    EXPECT_NO_THROW(multistack.push(2, (i + 1) * 100));
+  }
+  EXPECT_THROW(multistack.push(2, 99), std::logic_error);
 }
