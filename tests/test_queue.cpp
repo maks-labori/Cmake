@@ -1,7 +1,7 @@
 // Copyright 2026 Maksim
 
 #include <gtest/gtest.h>
-
+#include <string>
 #include <stdexcept>
 #include <utility>
 
