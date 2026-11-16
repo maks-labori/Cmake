@@ -14,7 +14,8 @@ include(cmake/function.cmake)         # подхватываем функции,
 add_subdirectory(StackMas_lib)
 add_subdirectory(multistack_lib)
 add_subdirectory(Vector_lib) 
-add_subdirectory(ListNode_lib)		
+add_subdirectory(ListNode_lib)
+add_subdirectory(Queue_lib)		
 add_subdirectory(Algorithms) 
 add_subdirectory(DS_APP)                # подключаем дополнительный CMakeLists.txt из подкаталога с именем main
 

@@ -11,9 +11,11 @@ TEST(TestStackMas , TestSizeConstructor) {
 
 TEST(TestStackMas , TestCopyConstructor) {
     Stack<int> stack(20);
+    stack.push(1);
     Stack<int> copy_stack(stack);
     EXPECT_EQ(stack.get_size(), copy_stack.get_size());
     EXPECT_EQ(stack.get_top(), copy_stack.get_top());
+    EXPECT_EQ(copy_stack.top(), 1);
 }
 
 TEST(TestStackMas , TestIsFull) {
