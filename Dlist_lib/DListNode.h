@@ -57,15 +57,17 @@ class ListDNode {
         DNodeType* prev_node;
 
      public:
-        explicit Iterator(DNodeType* current = nullptr, DNodeType* prev = nullptr) :
+        explicit Iterator(DNodeType* current = nullptr,
+            DNodeType* prev = nullptr) :
             current_(current), prev_node(prev) {}
         Iterator(const Iterator& other) :
-            current_(other.current_), prev_node(other.prev_node) {}
+            current_(other.current_),
+            prev_node(other.prev_node) {}
         Iterator<Type, DNodeType>& operator++() {
             current_ = current_->next_;
             if (current_) {
                 prev_node = current_->prev_;
-            }else {
+            } else {
                 prev_node = nullptr;
             }
             return (*this);
@@ -88,7 +90,7 @@ class ListDNode {
                 current_ = current_->next_;
                 if (current_) {
                     prev_node = current_->prev_;
-                }else {
+                } else {
                     prev_node = nullptr;
                 }
             }
@@ -164,7 +166,7 @@ void ListDNode<T>::push_front(const T& value) noexcept {
     DNode<T>* tmp = new DNode<T>(head_, nullptr, value);
     if (isEmpty()) {
         tail_ = tmp;
-    }else {
+    } else {
         head_->prev_ = tmp;
     }
     head_ = tmp;
@@ -176,7 +178,7 @@ void ListDNode<T>::push_back(const T& value) noexcept {
     DNode<T>* tmp = new DNode<T>(nullptr, tail_, value);
     if (isEmpty()) {
         head_ = tmp;
-    }else {
+    } else {
         tail_->next_ = tmp;
     }
     tail_ = tmp;
@@ -187,13 +189,13 @@ template <typename T>
 DNode<T>* ListDNode<T>::insert_ind(const T& value, size_t index) {
     if (index >= size_) {
         throw std::out_of_range("out of range");
-    }else if (isEmpty() || index == 0) {
+    } else if (isEmpty() || index == 0) {
         push_front(value);
         return head_;
-    }else if (index == size_) {
+    } else if (index == size_) {
         push_back(value);
         return tail_;
-    }else {
+    } else {
         DNode<T>* current = head_;
         for (size_t i = 0; i < index - 1; ++i) {
             current = current->next_;
@@ -225,7 +227,7 @@ T ListDNode<T>::pop_front() {
     DNode<T>* tmp = head_->next_;
     if (tmp == nullptr) {
         tail_ = nullptr;
-    }else {
+    } else {
         tmp->prev_ = nullptr;
     }
     T res = head_->data_;
