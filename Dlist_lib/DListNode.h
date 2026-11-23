@@ -8,7 +8,10 @@ struct DNode {
     T data_;
     DNode<T>* next_;
     DNode<T>* prev_;
-    explicit DNode(DNode<T>* next = nullptr, DNode<T>* prev = nullptr, const T& val = T())
+    explicit DNode(
+        DNode<T>* next = nullptr,
+        DNode<T>* prev = nullptr,
+        const T& val = T())
         : data_(val), next_(next), prev_(prev) {
     }
     DNode(const DNode<T>& other) = default;
@@ -20,12 +23,12 @@ struct DNode {
 
 template <typename T>
 class ListDNode {
-private:
+ private:
     DNode<T>* head_;
     DNode<T>* tail_;
     size_t size_;
 
-public:
+ public:
     ListDNode() : head_(nullptr), tail_(nullptr), size_(0) {}
     ~ListDNode() {
         while (head_ != nullptr) {
@@ -49,16 +52,22 @@ public:
 
     template <typename Type, typename DNodeType>
     class Iterator {
-    private:
+     private:
         DNodeType* current_;
         DNodeType* prev_node;
-    public:
-        explicit Iterator(DNodeType* current = nullptr, DNodeType* prev = nullptr) : current_(current), prev_node(prev) {}
-        Iterator(const Iterator& other) : current_(other.current_), prev_node(other.prev_node) {}
+
+     public:
+        explicit Iterator(DNodeType* current = nullptr, DNodeType* prev = nullptr) :
+            current_(current), prev_node(prev) {}
+        Iterator(const Iterator& other) :
+            current_(other.current_), prev_node(other.prev_node) {}
         Iterator<Type, DNodeType>& operator++() {
             current_ = current_->next_;
-            if (current_) { prev_node = current_->prev_; }
-            else { prev_node = nullptr; }
+            if (current_) {
+                prev_node = current_->prev_;
+            }else {
+                prev_node = nullptr;
+            }
             return (*this);
         }
         Iterator<Type, DNodeType> operator++(int) {
@@ -68,7 +77,8 @@ public:
         }
         Type& operator*() { return (current_->data_); }
         DNodeType* operator->() { return current_; }
-        Iterator<Type, DNodeType>& operator=(const Iterator<Type, DNodeType>& it) {
+        Iterator<Type, DNodeType>& operator=
+            (const Iterator<Type, DNodeType>& it) {
             current_ = it.current_;
             prev_node = it.prev_node;
             return (*this);
@@ -76,8 +86,11 @@ public:
         Iterator<Type, DNodeType>& operator+=(size_t offset) {
             for (size_t i = 0; i < offset; ++i) {
                 current_ = current_->next_;
-                if (current_) { prev_node = current_->prev_; }
-                else { prev_node = nullptr; }
+                if (current_) {
+                    prev_node = current_->prev_;
+                }else {
+                    prev_node = nullptr;
+                }
             }
             return (*this);
         }
@@ -126,12 +139,24 @@ public:
     typedef Iterator<T, DNode<T>> iterator;
     typedef Iterator<const T, const DNode<T>> const_iterator;
 
-    const_iterator cbegin() const noexcept { return const_iterator(head_, nullptr); }
-    const_iterator cend() const noexcept { return const_iterator(tail_->next_, tail_); }
-    iterator begin() noexcept { return iterator(head_, nullptr); }
-    iterator end() noexcept { return iterator(tail_->next_, tail_); }
-    const_iterator begin()const noexcept { return const_iterator(head_, nullptr); }
-    const_iterator end()const noexcept { return const_iterator(tail_->next_, tail_); }
+    const_iterator cbegin() const noexcept {
+        return const_iterator(head_, nullptr);
+    }
+    const_iterator cend() const noexcept {
+        return const_iterator(tail_->next_, tail_);
+    }
+    iterator begin() noexcept {
+        return iterator(head_, nullptr);
+    }
+    iterator end() noexcept {
+        return iterator(tail_->next_, tail_);
+    }
+    const_iterator begin()const noexcept {
+        return const_iterator(head_, nullptr);
+    }
+    const_iterator end()const noexcept {
+        return const_iterator(tail_->next_, tail_);
+    }
 };
 
 template <typename T>
@@ -139,8 +164,7 @@ void ListDNode<T>::push_front(const T& value) noexcept {
     DNode<T>* tmp = new DNode<T>(head_, nullptr, value);
     if (isEmpty()) {
         tail_ = tmp;
-    }
-    else {
+    }else {
         head_->prev_ = tmp;
     }
     head_ = tmp;
@@ -152,8 +176,7 @@ void ListDNode<T>::push_back(const T& value) noexcept {
     DNode<T>* tmp = new DNode<T>(nullptr, tail_, value);
     if (isEmpty()) {
         head_ = tmp;
-    }
-    else {
+    }else {
         tail_->next_ = tmp;
     }
     tail_ = tmp;
@@ -164,16 +187,13 @@ template <typename T>
 DNode<T>* ListDNode<T>::insert_ind(const T& value, size_t index) {
     if (index >= size_) {
         throw std::out_of_range("out of range");
-    }
-    else if (isEmpty() || index == 0) {
+    }else if (isEmpty() || index == 0) {
         push_front(value);
         return head_;
-    }
-    else if (index == size_) {
+    }else if (index == size_) {
         push_back(value);
         return tail_;
-    }
-    else {
+    }else {
         DNode<T>* current = head_;
         for (size_t i = 0; i < index - 1; ++i) {
             current = current->next_;
@@ -205,8 +225,7 @@ T ListDNode<T>::pop_front() {
     DNode<T>* tmp = head_->next_;
     if (tmp == nullptr) {
         tail_ = nullptr;
-    }
-    else {
+    }else {
         tmp->prev_ = nullptr;
     }
     T res = head_->data_;

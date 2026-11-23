@@ -44,7 +44,7 @@ class ListNode {
   Node<T>* find(const T& elem) const noexcept;
   inline bool isEmpty() const noexcept { return size_ == 0; }
 
-  template <typename Type,typename NodeType>
+  template <typename Type, typename NodeType>
   class Iterator {
    private:
     NodeType* current_;
@@ -52,7 +52,7 @@ class ListNode {
    public:
     explicit Iterator(NodeType* current = nullptr) : current_(current) {}
     Iterator(const Iterator& other) : current_(other.current_) {}
-    Iterator<Type,NodeType>& operator++() {
+    Iterator<Type, NodeType>& operator++() {
       current_ = current_->next_;
       return (*this);
     }
@@ -88,8 +88,8 @@ class ListNode {
     }
   };
 
-  typedef Iterator<T,Node<T>> iterator;
-  typedef Iterator<const T,const Node<T>> const_iterator;
+  typedef Iterator<T, Node<T>> iterator;
+  typedef Iterator<const T, const Node<T>> const_iterator;
 
   const_iterator cbegin() const noexcept { return const_iterator(head_); }
   const_iterator cend() const noexcept { return const_iterator(tail_->next_); }
