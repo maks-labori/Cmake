@@ -44,63 +44,59 @@ class ListNode {
   Node<T>* find(const T& elem) const noexcept;
   inline bool isEmpty() const noexcept { return size_ == 0; }
 
-  template <class Type>
+  template <typename Type,typename NodeType>
   class Iterator {
    private:
-    Node<Type>* current_;
+    NodeType* current_;
 
    public:
-    explicit Iterator(Node<Type>* current = nullptr) : current_(current) {}
+    explicit Iterator(NodeType* current = nullptr) : current_(current) {}
     Iterator(const Iterator& other) : current_(other.current_) {}
-    Iterator<Type>& operator++() {
+    Iterator<Type,NodeType>& operator++() {
       current_ = current_->next_;
       return (*this);
     }
-    Iterator<Type> operator++(int) {
-      Iterator<Type> tmp = (*this);
+    Iterator<Type, NodeType> operator++(int) {
+      Iterator<Type, NodeType> tmp = (*this);
       ++(*this);
       return tmp;
     }
     Type& operator*() { return (current_->data_); }
-    Node<Type>* operator->() { return current_; }
-    const Type& operator*() const { return current_->data_; }
-    Iterator<Type>& operator=(const Iterator<Type>& it) {
+    NodeType* operator->() { return current_; }
+    Iterator<Type, NodeType>& operator=(const Iterator<Type, NodeType>& it) {
       current_ = it.current_;
       return (*this);
     }
-    Iterator<Type>& operator+=(size_t offset) {
+    Iterator<Type, NodeType>& operator+=(size_t offset) {
       for (size_t i = 0; i < offset; ++i) {
         current_ = current_->next_;
       }
       return (*this);
     }
 
-    Iterator<Type> operator+(size_t offset) {
-      Iterator<Type> tmp(current_);
+    Iterator<Type, NodeType> operator+(size_t offset) {
+      Iterator<Type, NodeType> tmp(current_);
       tmp += offset;
       return tmp;
     }
 
-    bool operator==(const Iterator<Type>& it) const noexcept {
+    bool operator==(const Iterator<Type, NodeType>& it) const noexcept {
       return (current_ == it.current_);
     }
-    bool operator!=(const Iterator<Type>& it) const noexcept {
+    bool operator!=(const Iterator<Type, NodeType>& it) const noexcept {
       return !((*this) == it);
     }
   };
 
-  template <class Type>
-  class Iterator;
-  typedef Iterator<T> iterator;
-
-  template <class Type>
-  class Iterator;
-  typedef Iterator<const T> const_iterator;
+  typedef Iterator<T,Node<T>> iterator;
+  typedef Iterator<const T,const Node<T>> const_iterator;
 
   const_iterator cbegin() const noexcept { return const_iterator(head_); }
   const_iterator cend() const noexcept { return const_iterator(tail_->next_); }
   iterator begin() noexcept { return iterator(head_); }
   iterator end() noexcept { return iterator(tail_->next_); }
+  const_iterator begin()const noexcept { return const_iterator(head_); }
+  const_iterator end()const noexcept { return const_iterator(tail_->next_); }
 };
 template <typename T>
 void ListNode<T>::push_front(const T& value) noexcept {

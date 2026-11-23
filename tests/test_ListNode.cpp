@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "../ListNode_lib/ListNode.h"
+
 #include "gtest/gtest.h"
 
 TEST(ListNodeTest, TestDefaultConstructor) {
@@ -210,3 +211,42 @@ TEST(ListNodeIteratorTest, TestIteratorForLoop) {
   EXPECT_EQ(result[1], 2);
   EXPECT_EQ(result[2], 3);
 }
+
+TEST(ListNodeIteratorTest, TestSumWithValue) {
+    ListNode<int> list;
+    list.push_back(10);
+    list.push_back(20);
+    list.push_back(30);
+    list.push_back(57);
+    auto it = list.begin();
+    EXPECT_EQ(*it, 10);
+    auto ref = it+3;
+    EXPECT_EQ(*it, 10);
+    EXPECT_EQ(*ref, 57);
+}
+
+TEST(IteratorTest, ConstMemberFunctions) {
+    ListNode<int> list;
+    list.push_back(1);
+    list.push_back(2);
+
+    const ListNode<int>& cref = list;
+
+    int sum = 0;
+    for (auto it = cref.begin(); it != cref.end(); ++it) {
+        sum += *it;
+    }
+    EXPECT_EQ(sum, 3);
+}
+TEST(IteratorTest, TestConstSum) {
+    ListNode<int> list;
+    list.push_back(10);
+    list.push_back(20);
+    list.push_back(30);
+    list.push_back(57);
+    auto it = list.cbegin();
+    EXPECT_EQ(*it, 10);
+    it += 3;
+    EXPECT_EQ(*it, 57);
+}
+
