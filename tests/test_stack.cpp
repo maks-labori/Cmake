@@ -1,24 +1,32 @@
 // Copyright 2026 Maksim
 
 #include "gtest/gtest.h"
-#include "../StackMas_lib/stack.h"
 
-TEST(TestStackMas , TestSizeConstructor) {
+//#define StackOnMas
+#define StackOnList
+
+#ifdef StackOnMas
+#include "../StackMas_lib/stack.h"
+#endif 
+
+#ifdef StackOnList
+#include "../StackList_lib/StackList.h"
+#endif
+
+TEST(TestStackMas, TestSizeConstructor) {
     Stack<int> stack(20);
     EXPECT_EQ(stack.get_size(), 20);
-    EXPECT_EQ(stack.get_top(), -1);
 }
 
-TEST(TestStackMas , TestCopyConstructor) {
+TEST(TestStackMas, TestCopyConstructor) {
     Stack<int> stack(20);
     stack.push(1);
     Stack<int> copy_stack(stack);
     EXPECT_EQ(stack.get_size(), copy_stack.get_size());
-    EXPECT_EQ(stack.get_top(), copy_stack.get_top());
     EXPECT_EQ(copy_stack.top(), 1);
 }
 
-TEST(TestStackMas , TestIsFull) {
+TEST(TestStackMas, TestIsFull) {
     Stack<int> stack(3);
     stack.push(1);
     stack.push(2);
@@ -26,7 +34,7 @@ TEST(TestStackMas , TestIsFull) {
     EXPECT_TRUE(stack.is_full());
 }
 
-TEST(TestStackMas , TestIsEmpty) {
+TEST(TestStackMas, TestIsEmpty) {
     Stack<int> stack(3);
     EXPECT_TRUE(stack.is_empty());
     stack.push(1);
@@ -35,7 +43,7 @@ TEST(TestStackMas , TestIsEmpty) {
     EXPECT_TRUE(stack.is_empty());
 }
 
-TEST(TestStackMas , TesTop) {
+TEST(TestStackMas, TesTop) {
     Stack<int> stack(3);
     EXPECT_THROW(stack.top(), std::logic_error);
     stack.push(1);
@@ -44,7 +52,7 @@ TEST(TestStackMas , TesTop) {
     EXPECT_EQ(stack.top(), 50);
 }
 
-TEST(TestStackMas , TestPop) {
+TEST(TestStackMas, TestPop) {
     Stack<int> stack(30);
     EXPECT_THROW(stack.pop(), std::logic_error);
     stack.push(5);
@@ -53,7 +61,7 @@ TEST(TestStackMas , TestPop) {
     EXPECT_TRUE(stack.is_empty(), true);
 }
 
-TEST(TestStackMas , TestPush) {
+TEST(TestStackMas, TestPush) {
     Stack<int> stack(20);
     int count = 0;
     while (!stack.is_full()) {
