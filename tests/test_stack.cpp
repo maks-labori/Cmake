@@ -2,12 +2,12 @@
 
 #include "gtest/gtest.h"
 
-//#define StackOnMas
+// #define StackOnMas
 #define StackOnList
 
 #ifdef StackOnMas
 #include "../StackMas_lib/stack.h"
-#endif 
+#endif
 
 #ifdef StackOnList
 #include "../StackList_lib/StackList.h"

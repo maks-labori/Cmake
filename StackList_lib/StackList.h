@@ -1,9 +1,9 @@
 // Copyright 2026 Maksim Tarasenko
 #pragma once
-#include "../ListNode_lib/ListNode.h"
 
 #include <iostream>
 #include <stdexcept>
+#include "../ListNode_lib/ListNode.h"
 
 template <class T>
 class Stack {
